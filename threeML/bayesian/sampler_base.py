@@ -159,10 +159,11 @@ class SamplerBase(with_metaclass(abc.ABCMeta, object)):
         """
         idx = self._log_probability_values.argmax()
         for i, (parameter_name, parameter) in enumerate(self._free_parameters.items()):
+            if self._samples[parameter_name] is not None:
 
-            par = self._samples[parameter_name][idx]
+                par = self._samples[parameter_name][idx]
 
-            parameter.value = par
+                parameter.value = par
 
     def _build_samples_dictionary(self):
         """
